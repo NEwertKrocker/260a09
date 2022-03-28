@@ -12,7 +12,7 @@ const bob = {
 };
 
 describe("Bug Fix: Sending Messages", () => {
-  it("setup", () => {
+  it.only("setup", () => {
     cy.signup(alice.username, alice.email, alice.password);
     cy.logout();
     cy.signup(bob.username, bob.email, bob.password);

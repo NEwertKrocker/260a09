@@ -80,14 +80,14 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      conversations.forEach((convo) => {
+      const newConvos = conversations.forEach((convo) => {
         if (convo.otherUser.id === recipientId) {
           convo.messages.push(message);
           convo.latestMessageText = message.text;
           convo.id = message.conversationId;
         }
       });
-      setConversations(conversations);
+      setConversations(newConvos);
     },
     [setConversations, conversations],
   );
@@ -105,13 +105,16 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
-      conversations.forEach((convo) => {
+      const newConvos = conversations.map((convo) => {
         if (convo.id === message.conversationId) {
-          convo.messages.push(message);
+          convo.messages.unshift(message);
           convo.latestMessageText = message.text;
+          return convo
+        } else {
+          return convo
         }
       });
-      setConversations(conversations);
+      setConversations(newConvos);
     },
     [setConversations, conversations],
   );
@@ -167,7 +170,7 @@ const Home = ({ user, logout }) => {
 
   useEffect(() => {
     // when fetching, prevent redirect
-    if (user?.isFetching) return;
+    if (user.isFetching) return;
 
     if (user && user.id) {
       setIsLoggedIn(true);

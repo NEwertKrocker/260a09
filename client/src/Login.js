@@ -8,6 +8,7 @@ import {
   FormControl,
   TextField,
 } from '@material-ui/core';
+import bgImg from './assets/bg-img.png';
 
 const Login = ({ user, login }) => {
   const history = useHistory();
@@ -27,23 +28,28 @@ const Login = ({ user, login }) => {
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="space-evenly">
+      <Grid item>
+        <img alt='People chatting amiably' src={bgImg} />
+      </Grid>
       <Box>
         <Grid container item>
-          <Typography>Don't have an account?</Typography>
+          <Typography color='secondary'>Don't have an account?</Typography>
           <Link href="/register" to="/register">
-            <Button>Create Account</Button>
+            <Button variant='text' size='large' color='primary'>Create Account</Button>
           </Link>
         </Grid>
         <form onSubmit={handleLogin}>
           <Grid>
             <Grid>
+              <Typography variant='h5'>Welcome back!</Typography>
               <FormControl margin="normal" required>
                 <TextField
                   aria-label="username"
                   label="Username"
                   name="username"
                   type="text"
+                  color="secondary"
                 />
               </FormControl>
             </Grid>
@@ -53,10 +59,11 @@ const Login = ({ user, login }) => {
                 aria-label="password"
                 type="password"
                 name="password"
+                color="secondary"
               />
             </FormControl>
             <Grid>
-              <Button type="submit" variant="contained" size="large">
+              <Button type="submit" variant="contained" size="large" color='primary'>
                 Login
               </Button>
             </Grid>

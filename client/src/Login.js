@@ -7,6 +7,7 @@ import {
   Button,
   FormControl,
   TextField,
+  InputAdornment
 } from '@material-ui/core';
 import bgImg from './assets/bg-img.png';
 
@@ -43,23 +44,28 @@ const Login = ({ user, login }) => {
           <Grid>
             <Grid>
               <Typography variant='h5'>Welcome back!</Typography>
-              <FormControl margin="normal" required>
+              <FormControl margin="normal" fullWidth={true} required>
                 <TextField
                   aria-label="username"
                   label="Username"
                   name="username"
                   type="text"
-                  color="secondary"
+                  color="primary"
                 />
               </FormControl>
             </Grid>
-            <FormControl margin="normal" required>
+            <FormControl margin="normal" fullWidth={true} required>
               <TextField
                 label="password"
                 aria-label="password"
                 type="password"
                 name="password"
-                color="secondary"
+                color="primary"
+                InputProps={{
+                  endAdornment: <InputAdornment position='end' color="primary">
+                    <Typography color="primary" variant="body2">Forgot?</Typography>
+                  </InputAdornment>,
+                }}
               />
             </FormControl>
             <Grid>

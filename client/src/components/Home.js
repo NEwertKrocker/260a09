@@ -106,9 +106,7 @@ const Home = ({ user, logout }) => {
           messages: [message],
         };
         newConvo.latestMessageText = message.text;
-        console.log(conversations, "<<<<<<convos before setConvos")
         setConversations((prev) => [newConvo, ...prev]);
-        console.log(conversations, "<<<<<<<convos after setConvos")
       }
 
       const newConvos = conversations.map((convo) => {

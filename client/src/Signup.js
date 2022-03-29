@@ -39,7 +39,7 @@ const Signup = ({ user, register }) => {
     <Grid container justifyContent="center">
       <Box>
         <Grid container item>
-          <Typography>Need to log in?</Typography>
+          <Typography>Already have an account?</Typography>
           <Link href="/login" to="/login">
             <Button>Login</Button>
           </Link>

@@ -30,9 +30,9 @@ const Login = ({ user, login }) => {
     <Grid container justifyContent="center">
       <Box>
         <Grid container item>
-          <Typography>Need to register?</Typography>
+          <Typography>Don't have an account?</Typography>
           <Link href="/register" to="/register">
-            <Button>Register</Button>
+            <Button>Create Account</Button>
           </Link>
         </Grid>
         <form onSubmit={handleLogin}>

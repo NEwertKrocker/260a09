@@ -82,11 +82,12 @@ const Home = ({ user, logout }) => {
     (recipientId, message) => {
       const newConvos = conversations.map((convo) => {
         if (convo.otherUser.id === recipientId) {
-          console.log('otheruser.id match!')
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-          return convo
+          const updatedConvo = { ...convo, messages: [ ...convo.messages] }
+          updatedConvo.messages = [ ...updatedConvo.messages, message]
+          updatedConvo.latestMessageText = message.text;
+          updatedConvo.messages.sort((a, b) => {return a.createdAt - b.createdAt})
+          updatedConvo.id = message.conversationId;
+          return updatedConvo
         } else {
           return convo
         }
@@ -111,9 +112,11 @@ const Home = ({ user, logout }) => {
 
       const newConvos = conversations.map((convo) => {
         if (convo.id === message.conversationId) {
-          convo.messages.unshift(message);
-          convo.latestMessageText = message.text;
-          return convo
+          const updatedConvo = { ...convo, messages: [ ...convo.messages] }
+          updatedConvo.messages = [ ...updatedConvo.messages, message]
+          updatedConvo.latestMessageText = message.text;
+          updatedConvo.messages.sort((a, b) => {return a.createdAt - b.createdAt})
+          return updatedConvo
         } else {
           return convo
         }
@@ -174,7 +177,7 @@ const Home = ({ user, logout }) => {
 
   useEffect(() => {
     // when fetching, prevent redirect
-    if (user.isFetching) return;
+    if (user?.isFetching) return;
 
     if (user && user.id) {
       setIsLoggedIn(true);

@@ -78,8 +78,8 @@ const Login = ({ user, login }) => {
           <Typography variant="h5" >Converse with anyone with any language</Typography>
         </Box>
       </Grid>
-      <Box sx={{ width: "35%", padding: "0% 10%" }}>
-        <Grid container item style={{ margin: "50px" }}>
+      <Box sx={{ width: { xs: "80%", sm: "35%"}, padding: "0% 10%" }}>
+        <Grid container item style={{ display: "flex", justifyContent: "flex-end", margin: "50px" }}>
           <Typography color='secondary' style={{ padding: "16px 24px" }}>Don't have an account?</Typography>
           <Link href="/register" to="/register" style={{ textDecoration: "none" }}>
             <Button variant='text' size='large' color='primary' style={{ padding: "15px 25px", boxShadow: "1px 1px 5px .2px"}}>Create Account</Button>

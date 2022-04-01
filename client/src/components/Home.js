@@ -82,11 +82,11 @@ const Home = ({ user, logout }) => {
     (recipientId, message) => {
       const newConvos = conversations.map((convo) => {
         if (convo.otherUser.id === recipientId) {
-          console.log('otheruser.id match!')
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-          return convo
+          const convoCopy = { ...convo, messages: [ ...convo.messages] }
+          convoCopy.messages.push(message);
+          convoCopy.latestMessageText = message.text;
+          convoCopy.id = message.conversationId;
+          return convoCopy
         } else {
           return convo
         }
@@ -111,9 +111,10 @@ const Home = ({ user, logout }) => {
 
       const newConvos = conversations.map((convo) => {
         if (convo.id === message.conversationId) {
-          convo.messages.unshift(message);
-          convo.latestMessageText = message.text;
-          return convo
+          const convoCopy = { ...convo, messages: [ ...convo.messages] }
+          convoCopy.messages.push(message);
+          convoCopy.latestMessageText = message.text;
+          return convoCopy
         } else {
           return convo
         }
@@ -174,7 +175,7 @@ const Home = ({ user, logout }) => {
 
   useEffect(() => {
     // when fetching, prevent redirect
-    if (user.isFetching) return;
+    if (user?.isFetching) return;
 
     if (user && user.id) {
       setIsLoggedIn(true);
@@ -189,6 +190,10 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
+        const sortedConvos = data.map((convo) => {
+          convo.messages.sort((a, b) => {return a.id - b.id})
+          return convo
+        })
         setConversations(data);
       } catch (error) {
         console.error(error);

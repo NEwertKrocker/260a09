@@ -82,12 +82,11 @@ const Home = ({ user, logout }) => {
     (recipientId, message) => {
       const newConvos = conversations.map((convo) => {
         if (convo.otherUser.id === recipientId) {
-          const updatedConvo = { ...convo, messages: [ ...convo.messages] }
-          updatedConvo.messages = [ ...updatedConvo.messages, message]
-          updatedConvo.latestMessageText = message.text;
-          updatedConvo.messages.sort((a, b) => {return a.createdAt - b.createdAt})
-          updatedConvo.id = message.conversationId;
-          return updatedConvo
+          const convoCopy = { ...convo, messages: [ ...convo.messages] }
+          convoCopy.messages.push(message);
+          convoCopy.latestMessageText = message.text;
+          convoCopy.id = message.conversationId;
+          return convoCopy
         } else {
           return convo
         }
@@ -112,11 +111,10 @@ const Home = ({ user, logout }) => {
 
       const newConvos = conversations.map((convo) => {
         if (convo.id === message.conversationId) {
-          const updatedConvo = { ...convo, messages: [ ...convo.messages] }
-          updatedConvo.messages = [ ...updatedConvo.messages, message]
-          updatedConvo.latestMessageText = message.text;
-          updatedConvo.messages.sort((a, b) => {return a.createdAt - b.createdAt})
-          return updatedConvo
+          const convoCopy = { ...convo, messages: [ ...convo.messages] }
+          convoCopy.messages.push(message);
+          convoCopy.latestMessageText = message.text;
+          return convoCopy
         } else {
           return convo
         }
@@ -192,6 +190,10 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
+        const sortedConvos = data.map((convo) => {
+          convo.messages.sort((a, b) => {return a.id - b.id})
+          return convo
+        })
         setConversations(data);
       } catch (error) {
         console.error(error);

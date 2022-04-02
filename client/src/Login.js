@@ -10,6 +10,7 @@ import {
   InputAdornment
 } from '@material-ui/core';
 import LandingSidebar from './LandingSidebar.js'
+import LoginHeader from './LoginHeader.js'
 import bgImg from './assets/bg-img.png';
 import bubble from './assets/bubble.svg';
 
@@ -34,13 +35,7 @@ const Login = ({ user, login }) => {
   return (
     <Grid container sx={{ height: "100vh" }}>
       <LandingSidebar />
-      <Box sx={{ width: { xs: "80%", sm: "35%"}, padding: "0% 10%" }}>
-        <Grid container item style={{ display: "flex", justifyContent: "flex-end", margin: "50px" }}>
-          <Typography color='secondary' style={{ padding: "16px 24px" }}>Don't have an account?</Typography>
-          <Link href="/register" to="/register" style={{ textDecoration: "none" }}>
-            <Button variant='text' size='large' color='primary' style={{ padding: "15px 25px", boxShadow: "1px 1px 5px .2px"}}>Create Account</Button>
-          </Link>
-        </Grid>
+      <LoginHeader />
         <form onSubmit={handleLogin}>
           <Grid style={{ marginTop: "100px"}}>
             <Grid>
@@ -76,7 +71,6 @@ const Login = ({ user, login }) => {
             </Grid>
           </Grid>
         </form>
-      </Box>
     </Grid>
   );
 };

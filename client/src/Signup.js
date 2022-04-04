@@ -2,20 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
   Grid,
-  Box,
-  Typography,
-  Button,
   FormControl,
   TextField,
   FormHelperText,
+  Button
 } from '@material-ui/core';
 import LandingSidebar from './LandingSidebar.js'
 import LoginHeader from './LoginHeader.js'
-import bgImg from './assets/bg-img.png';
-import bubble from './assets/bubble.svg';
+import LoginFields from './LoginFields.js'
+import { makeStyles } from '@material-ui/core';
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
+
+  const useStyles = makeStyles({
+      forgotPassword: {
+        fontSize: "12px"
+      },
+      formContainer: {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        margin: "15% 10% 10% 50%",
+        width: "380px"
+      },
+      loginButton: {
+        fontSize: "16px",
+        fontWeight: 700,
+        width: "160px",
+        height: "56px",
+        textAlign: "center",
+        margin: "60px"
+      }
+  })
+
+  const classes = useStyles();
 
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
@@ -44,32 +65,8 @@ const Signup = ({ user, register }) => {
       <LandingSidebar />
       <LoginHeader view={"signup"} switchView={"/login"} buttonText={"Login"}/>
         <form onSubmit={handleRegister}>
-          <Grid>
-            <Grid>
-            <Typography variant='h5'>Create an account.</Typography>
-              <FormControl margin="normal" fullWidth={true}>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                  color="primary"
-                  required
-                />
-              </FormControl>
-            </Grid>
-            <Grid>
-              <FormControl margin="normal" fullWidth={true}>
-                <TextField
-                  label="E-mail address"
-                  aria-label="e-mail address"
-                  type="email"
-                  name="email"
-                  color="primary"
-                  required
-                />
-              </FormControl>
-            </Grid>
+          <Grid container className={classes.formContainer}>
+            <LoginFields signup={true} greeting="Create an account." />
             <Grid>
               <FormControl margin="normal" fullWidth={true} error={!!formErrorMessage.confirmPassword}>
                 <TextField
@@ -101,7 +98,7 @@ const Signup = ({ user, register }) => {
               </FormControl>
             </Grid>
             <Grid container justifyContent="center">
-              <Button type="submit" variant="contained" size="large" color='primary' style={{ fontSize: 18, padding: "15px 60px", margin: "50px"}}>
+              <Button type="submit" variant="contained" size="large" color='primary' className={classes.loginButton}>
                 Create
               </Button>
             </Grid>

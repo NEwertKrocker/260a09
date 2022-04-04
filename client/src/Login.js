@@ -2,18 +2,11 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
   Grid,
-  Box,
-  Typography,
   Button,
-  FormControl,
-  TextField,
-  InputAdornment
 } from '@material-ui/core';
 import LandingSidebar from './LandingSidebar.js'
 import LoginHeader from './LoginHeader.js'
 import LoginFields from './LoginFields.js'
-import bgImg from './assets/bg-img.png';
-import bubble from './assets/bubble.svg';
 import { makeStyles } from '@material-ui/core';
 
 const Login = ({ user, login }) => {
@@ -62,7 +55,7 @@ const Login = ({ user, login }) => {
       <LoginHeader view={"login"} switchView={"/register"} buttonText={"Create account"}/>
         <form onSubmit={handleLogin}>
           <Grid container className={classes.formContainer}>
-            <LoginFields greeting="Welcome back!" passReminder={true} />
+            <LoginFields login={true} greeting="Welcome back!" />
             <Grid container justifyContent="center">
               <Button type="submit" variant="contained" size="large" color='primary' className={classes.loginButton}>
                 Login

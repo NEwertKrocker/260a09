@@ -3,14 +3,12 @@ import {
   Grid,
   TextField,
   Typography,
-  Link,
-  Button,
   FormControl,
-  InputAdornment
+  InputAdornment,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 
-const LoginFields = ({ greeting, passReminder }) => {
+const LoginFields = ({ login, signup, greeting }) => {
 
   const useStyles = makeStyles({
       forgotPassword: {
@@ -28,29 +26,41 @@ const LoginFields = ({ greeting, passReminder }) => {
   return(
     <Grid container className={classes.formContainer}>
       <Typography variant='h5'>{greeting}</Typography>
+      {signup && <Grid>
+        <FormControl margin="normal" fullWidth={true}>
+          <TextField
+            aria-label="username"
+            label="Username"
+            name="username"
+            type="text"
+            color="primary"
+            required
+          />
+        </FormControl>
+      </Grid>}
       <FormControl margin="normal" required>
         <TextField
-          aria-label="username"
+          aria-label="email-address"
           label="E-mail address"
           name="username"
           type="text"
           color="primary"
         />
       </FormControl>
-      <FormControl margin="normal" required>
+      {login && <FormControl margin="normal" required>
         <TextField
           label="Password"
           aria-label="password"
           type="password"
           name="password"
           color="primary"
-          InputProps={passReminder && {
+          InputProps={{
             endAdornment: <InputAdornment position='end'>
               <Typography color="primary" className={classes.forgotPassword}>Forgot?</Typography>
             </InputAdornment>,
           }}
         />
-      </FormControl>
+      </FormControl>}
     </Grid>
   )
 }

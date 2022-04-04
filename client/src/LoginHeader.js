@@ -8,43 +8,46 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 
-const LoginHeader = () => {
+const LoginHeader = ({ view, switchView, buttonText }) => {
 
   const useStyles = makeStyles({
       headerContainer: {
-        width: "100%",
-        padding: "0% 10%",
-      },
-      createAccountHeader: {
+        position: "absolute",
         display: "flex",
         justifyContent: "flex-end",
-        margin: "30px"
+        alignItems: "center",
+        width: "100%",
+        height: "15%",
+        padding: "0% 5%",
+      },
+      switchViewText: {
+        fontSize: "14px",
+        padding: "0px 30px"
       },
       switchLoginButton: {
-        position: "absolute",
+        fontSize: "14px",
         background: "#FFFFFF",
-        width: "170px",
+        padding: "0px 35px",
         height: "54px",
         boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)",
         borderRadius: "5px",
         textAlign: "center"
       },
       switchLoginLink: {
-        textDecoration: "none"
+        textDecoration: "none",
       }
   })
 
   const classes = useStyles();
 
   return (
-    <Box className={classes.headerContainer}>
-      <Grid item className={classes.createAccountHeader}>
-        <Typography color='secondary' style={{ padding: "16px 24px" }}>Don't have an account?</Typography>
-        <Link href="/register" to="/register" className={classes.switchLoginLink}>
-          <Button variant='text' size='large' color='primary' className={classes.switchLoginButton}>Create Account</Button>
+    <Grid container className={classes.headerContainer}>
+        {(view === "login") ? <Typography color='secondary' className={classes.switchViewText}>Don't have an account?</Typography> :
+          <Typography color='secondary' className={classes.switchViewText}> Already have an account? </Typography>}
+        <Link href={switchView} to={switchView} className={classes.switchLoginLink}>
+          <Button variant='text' size='large' color='primary' className={classes.switchLoginButton}>{buttonText}</Button>
         </Link>
-      </Grid>
-    </Box>
+    </Grid>
   )
 }
 

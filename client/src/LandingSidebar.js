@@ -14,15 +14,16 @@ const LandingSidebar = () => {
     backgroundImage: {
       position: 'absolute',
       background: `url(${bgImg})`,
-      height: "700px",
-      width: "425px",
+      backgroundSize: "cover",
+      height: "100%",
+      width: "42%",
       left: '0px',
       top: '0px'
     },
     background: {
       position: "absolute",
-      width: "425px",
-      height: "700px",
+      width: "100%",
+      height: "100%",
       left: "0px",
       top: "0px",
       background: "linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)",
@@ -31,22 +32,21 @@ const LandingSidebar = () => {
     },
     sidebarText: {
       position: "absolute",
-      width: "269px",
-      height: "186px",
-      left: "77.71px",
-      top: "199px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+      padding: "70px"
     },
     speechBubble: {
-      position: "absolute",
       width: "67px",
       height: "66px",
-      left: "37.8%",
-      right: "37.3%",
-      top: "0.27%",
-      bottom: "64.25%",
+      marginTop: "130px",
+      marginBottom: "40px"
     },
     tagline: {
-      position: "absolute",
       height: "80px",
       left: "0%",
       right: "0%",
@@ -67,10 +67,10 @@ const LandingSidebar = () => {
  return (
    <Grid item className={classes.backgroundImage}>
      <Box className={classes.background} />
-     <Box className={classes.sidebarText}>
+     <Grid container className={classes.sidebarText}>
        <Box className={classes.speechBubble} component="img" alt="Speech bubble icon" src={bubble} />
        <Typography className={classes.tagline} variant="h5" >Converse with anyone with any language</Typography>
-     </Box>
+     </Grid>
    </Grid>
 
  )

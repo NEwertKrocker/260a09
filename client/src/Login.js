@@ -11,11 +11,34 @@ import {
 } from '@material-ui/core';
 import LandingSidebar from './LandingSidebar.js'
 import LoginHeader from './LoginHeader.js'
+import LoginFields from './LoginFields.js'
 import bgImg from './assets/bg-img.png';
 import bubble from './assets/bubble.svg';
+import { makeStyles } from '@material-ui/core';
 
 const Login = ({ user, login }) => {
   const history = useHistory();
+
+  const useStyles = makeStyles({
+      forgotPassword: {
+        fontSize: "12px"
+      },
+      formContainer: {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        margin: "15% 10% 10% 50%",
+        width: "380px"
+      },
+      loginButton: {
+        fontSize: "16px",
+        fontWeight: 700,
+        width: "160px",
+        height: "56px",
+        textAlign: "center",
+        margin: "60px"
+      }
+  })
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -31,41 +54,17 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push('/home');
   }, [user, history]);
 
+  const classes = useStyles();
 
   return (
     <Grid container sx={{ height: "100vh" }}>
       <LandingSidebar />
-      <LoginHeader />
+      <LoginHeader view={"login"} switchView={"/register"} buttonText={"Create account"}/>
         <form onSubmit={handleLogin}>
-          <Grid style={{ marginTop: "100px"}}>
-            <Grid>
-              <Typography variant='h5'>Welcome back!</Typography>
-              <FormControl margin="normal" fullWidth={true} required>
-                <TextField
-                  aria-label="username"
-                  label="E-mail address"
-                  name="username"
-                  type="text"
-                  color="primary"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" fullWidth={true} required>
-              <TextField
-                label="Password"
-                aria-label="password"
-                type="password"
-                name="password"
-                color="primary"
-                InputProps={{
-                  endAdornment: <InputAdornment position='end' color="primary">
-                    <Typography color="primary" variant="body2">Forgot?</Typography>
-                  </InputAdornment>,
-                }}
-              />
-            </FormControl>
+          <Grid container className={classes.formContainer}>
+            <LoginFields greeting="Welcome back!" passReminder={true} />
             <Grid container justifyContent="center">
-              <Button type="submit" variant="contained" size="large" color='primary' style={{ fontSize: 18, padding: "15px 60px", margin: "50px"}}>
+              <Button type="submit" variant="contained" size="large" color='primary' className={classes.loginButton}>
                 Login
               </Button>
             </Grid>

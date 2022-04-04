@@ -10,6 +10,7 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 import LandingSidebar from './LandingSidebar.js'
+import LoginHeader from './LoginHeader.js'
 import bgImg from './assets/bg-img.png';
 import bubble from './assets/bubble.svg';
 
@@ -41,13 +42,7 @@ const Signup = ({ user, register }) => {
   return (
     <Grid container sx={{ height: "100vh" }}>
       <LandingSidebar />
-      <Box sx={{ width: { xs: "80%", sm: "35%"}, padding: "0% 10%" }}>
-        <Grid container item style={{ display: "flex", justifyContent: "space-around", margin: "50px" }}>
-          <Typography color='secondary' style={{ padding: "16px 24px" }}>Already have an account?</Typography>
-          <Link href="/login" to="/login" style={{ textDecoration: "none", alignItems: "center" }}>
-            <Button variant='text' size='large' color='primary' style={{ padding: "15px 50px", boxShadow: "1px 1px 5px .2px"}}>Login</Button>
-          </Link>
-        </Grid>
+      <LoginHeader view={"signup"} switchView={"/login"} buttonText={"Login"}/>
         <form onSubmit={handleRegister}>
           <Grid>
             <Grid>
@@ -112,7 +107,6 @@ const Signup = ({ user, register }) => {
             </Grid>
           </Grid>
         </form>
-      </Box>
     </Grid>
   );
 };

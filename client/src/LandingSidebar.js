@@ -18,7 +18,7 @@ const LandingSidebar = () => {
       height: "100%",
       width: "42%",
       left: '0px',
-      top: '0px'
+      top: '0px',
     },
     background: {
       position: "absolute",
@@ -65,7 +65,7 @@ const LandingSidebar = () => {
   const classes = useStyles();
 
  return (
-   <Grid item className={classes.backgroundImage}>
+   <Grid item className={classes.backgroundImage} >
      <Box className={classes.background} />
      <Grid container className={classes.sidebarText}>
        <Box className={classes.speechBubble} component="img" alt="Speech bubble icon" src={bubble} />

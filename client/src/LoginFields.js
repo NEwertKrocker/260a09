@@ -40,9 +40,9 @@ const LoginFields = ({ login, signup, greeting }) => {
       </Grid>}
       <FormControl margin="normal" required>
         <TextField
-          aria-label="email-address"
+          aria-label="email"
           label="E-mail address"
-          name="username"
+          name="email"
           type="text"
           color="primary"
         />

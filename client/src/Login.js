@@ -2,15 +2,36 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
   Grid,
-  Box,
-  Typography,
   Button,
-  FormControl,
-  TextField,
 } from '@material-ui/core';
+import LandingSidebar from './LandingSidebar.js'
+import LoginHeader from './LoginHeader.js'
+import LoginFields from './LoginFields.js'
+import { makeStyles } from '@material-ui/core';
 
 const Login = ({ user, login }) => {
   const history = useHistory();
+
+  const useStyles = makeStyles({
+      forgotPassword: {
+        fontSize: "12px"
+      },
+      formContainer: {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        margin: "15% 10% 10% 50%",
+        width: "380px"
+      },
+      loginButton: {
+        fontSize: "16px",
+        fontWeight: 700,
+        width: "160px",
+        height: "56px",
+        textAlign: "center",
+        margin: "60px"
+      }
+  })
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -26,43 +47,22 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push('/home');
   }, [user, history]);
 
+  const classes = useStyles();
+
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
-          </Link>
-        </Grid>
+    <Grid container sx={{ height: "100vh" }}>
+      <LandingSidebar />
+      <LoginHeader view={"login"} switchView={"/register"} buttonText={"Create account"}/>
         <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
+          <Grid container className={classes.formContainer}>
+            <LoginFields login={true} greeting="Welcome back!" />
+            <Grid container justifyContent="center">
+              <Button type="submit" variant="contained" size="large" color='primary' className={classes.loginButton}>
                 Login
               </Button>
             </Grid>
           </Grid>
         </form>
-      </Box>
     </Grid>
   );
 };

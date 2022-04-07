@@ -8,6 +8,10 @@ export const theme = createMuiTheme({
       textTransform: "none",
       letterSpacing: 0,
       fontWeight: "bold"
+    },
+    h5: {
+      fontSize: 26,
+      fontWeight: 600
     }
   },
   overrides: {
@@ -19,6 +23,10 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: { main: "#3A8DFF" },
-    secondary: { main: "#B0B0B0" }
+    secondary: {
+      main: "#B0B0B0",
+      contrastText: "#FFF"
+    },
+    info: { main: "#FFF" }
   }
 });

@@ -17,10 +17,12 @@ const useStyles = makeStyles(() => ({
     color: '#BECCE2',
     fontWeight: 'bold',
     marginBottom: 5,
+    display: "inline-block"
   },
   bubble: {
     backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
     borderRadius: '0 10px 10px 10px',
+    display: "inline-block"
   },
   text: {
     fontSize: 14,
@@ -29,10 +31,27 @@ const useStyles = makeStyles(() => ({
     letterSpacing: -0.2,
     padding: 8,
   },
+  imgThumb: {
+    display: "inline-block",
+    width: "100%",
+    borderRadius: '0px 10px 10px 10px',
+    padding: "5px"
+  },
+  imgGrid: {
+    borderRadius: '10px 10px 0 10px',
+    display: 'grid',
+    gridTemplateColumns: "repeat(2, 1fr)",
+    width: "20%",
+    margin: "none"
+  },
 }));
 
 const OtherUserBubble = ({ text, time, otherUser, attachments }) => {
   const classes = useStyles();
+
+  let imgThumbs = attachments.map((image) => {
+      return <Box className={classes.imgThumb} component="img" src={image} />
+    })
 
   return (
     <Box className={classes.root}>
@@ -45,6 +64,9 @@ const OtherUserBubble = ({ text, time, otherUser, attachments }) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
+        <Box className={classes.imgGrid}>
+          {attachments && imgThumbs}
+        </Box>
         <Box className={classes.bubble}>
           <Typography className={classes.text}>{text}</Typography>
         </Box>

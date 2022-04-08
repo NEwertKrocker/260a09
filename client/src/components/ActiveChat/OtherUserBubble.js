@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '10px 10px 0 10px',
     display: 'grid',
     gridTemplateColumns: "repeat(2, 1fr)",
-    width: "20%",
+    width: "30%",
     margin: "none"
   },
 }));

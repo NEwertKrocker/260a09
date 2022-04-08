@@ -45,7 +45,7 @@ const useStyles = makeStyles(() => ({
     display: 'grid',
     gridTemplateColumns: "repeat(2, 1fr)",
     justifyItems: "end",
-    width: "15%"
+    width: "30%"
   },
 }));
 

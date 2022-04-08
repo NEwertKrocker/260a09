@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FormControl, FilledInput, Button } from '@material-ui/core';
+import { FormControl, FilledInput, Button, Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -14,6 +14,15 @@ const useStyles = makeStyles(() => ({
     borderRadius: 8,
     marginBottom: 20,
   },
+  fileUploadInput: {
+    display: "none"
+  },
+  uploadFab: {
+    position: "absolute",
+    right: "20px",
+    top: "10px",
+    fontSize: 32
+  }
 }));
 
 const imgPost = axios.create()
@@ -63,7 +72,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       })
       imgURLs.push(imgData.data.url);
     }
-    
+
     return imgURLs
   }
 
@@ -80,9 +89,18 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
         />
       </FormControl>
       <FormControl>
-        <Button variant='contained' component='label'>
-          <input type="file" name="fileUpload" id="fileUpload" multiple />
-        </Button>
+        <label htmlFor="fileUpload">
+          <input className={classes.fileUploadInput} type="file" name="fileUpload" id="fileUpload" multiple />
+          <Fab
+            className={classes.uploadFab}
+            color="primary"
+            aria-label="add"
+            component="span"
+            variant="extended"
+          >
+            +
+          </Fab>
+        </label>
       </FormControl>
     </form>
   );

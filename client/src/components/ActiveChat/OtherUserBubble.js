@@ -49,9 +49,15 @@ const useStyles = makeStyles(() => ({
 const OtherUserBubble = ({ text, time, otherUser, attachments }) => {
   const classes = useStyles();
 
-  let imgThumbs = attachments.map((image) => {
+  let imgThumbs;
+
+  if(attachments /= null){
+    imgThumbs = attachments.map((image) => {
       return <Box className={classes.imgThumb} component="img" src={image} />
     })
+  } else {
+    attachments = [];
+  }
 
   return (
     <Box className={classes.root}>

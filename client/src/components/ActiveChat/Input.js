@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FormControl, FilledInput, Button, Fab } from '@material-ui/core';
+import { FormControl, FilledInput, Button, Fab, Badge } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -30,6 +30,7 @@ const imgPost = axios.create()
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState('');
+  const [attached, setAttached] = useState('');
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -55,7 +56,17 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
 
     await postMessage(reqBody);
     setText('');
+    setAttached('');
   };
+
+  const handleAttach = async (event) => {
+    event.preventDefault();
+    if(event.target.files.length){
+      setAttached(event.target.files.length)
+    } else if(!event.target.files.length){
+      setAttached('')
+    }
+  }
 
   const attachImages = async (images) => {
     const imgURLs = [];
@@ -95,16 +106,28 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       </FormControl>
       <FormControl>
         <label htmlFor="fileUpload">
-          <input className={classes.fileUploadInput} type="file" name="fileUpload" id="fileUpload" multiple />
-          <Fab
-            className={classes.uploadFab}
-            color="primary"
-            aria-label="add"
-            component="span"
-            variant="extended"
-          >
-            +
-          </Fab>
+          <input className={classes.fileUploadInput} type="file" name="fileUpload" id="fileUpload" onInput={handleAttach} multiple />
+          {attached && <Badge badgeContent={attached} color='error'>
+            <Fab
+              className={classes.uploadFab}
+              color="primary"
+              aria-label="add"
+              component="span"
+              variant="extended"
+            >
+              +
+            </Fab>
+          </Badge>}
+          {!attached &&
+            <Fab
+              className={classes.uploadFab}
+              color="primary"
+              aria-label="add"
+              component="span"
+              variant="extended"
+            >
+              +
+            </Fab>}
         </label>
       </FormControl>
     </form>

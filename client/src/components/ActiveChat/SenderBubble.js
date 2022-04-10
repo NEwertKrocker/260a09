@@ -53,7 +53,7 @@ const SenderBubble = ({ time, text, attachments }) => {
   const classes = useStyles();
 
   let multiImages = attachments.map((image) => {
-      return <Box className={classes.imgThumb} component="img" src={image} />
+      return <Box className={classes.imgThumb} key={image} component="img" src={image} />
     })
 
   return (

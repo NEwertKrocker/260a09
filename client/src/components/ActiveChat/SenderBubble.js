@@ -59,8 +59,8 @@ const SenderBubble = ({ time, text, attachments }) => {
   return (
     <Box className={classes.root}>
       {(attachments.length < 2) && <Typography className={classes.date}>{time}</Typography>}
+      {(attachments.length === 1) && <Box className={classes.image} component="img" src={attachments[0]} />}
       <Box className={classes.bubble}>
-        {(attachments.length === 1) && <Box className={classes.image} component="img" src={attachments[0]} />}
         <Typography className={classes.text}>{text}</Typography>
       </Box>
       {(attachments.length > 1) && <Box className={classes.imgGrid}>

@@ -59,21 +59,26 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
 
   const attachImages = async (images) => {
     const imgURLs = [];
+    const imgData = [];
     const imgBody = new FormData();
     for (let i = 0; i < images.length; i++){
       let file = images[i];
       imgBody.append("file", file);
       imgBody.append('upload_preset', "m7gjtifb");
 
-      const imgData = await imgPost({
+      imgData[i] = imgPost({
         method: 'post',
         url: "https://api.cloudinary.com/v1_1/dnxxjqz0o/image/upload",
         data: imgBody
       })
-      imgURLs.push(imgData.data.url);
     }
-
-    return imgURLs
+    const imgAttachments = await Promise.all(imgData).then((data) => {
+      data.map((url) => {
+        return imgURLs.push(url.data.url)
+      })
+      return imgURLs
+    })
+    return imgAttachments
   }
 
   return (

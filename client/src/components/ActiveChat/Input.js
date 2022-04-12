@@ -84,7 +84,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       })
     }
     const imgAttachments = await Promise.all(imgData).then((data) => {
-      data.map((url) => {
+      data.forEach((url) => {
         return imgURLs.push(url.data.url)
       })
       return imgURLs

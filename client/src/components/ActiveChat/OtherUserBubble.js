@@ -51,13 +51,9 @@ const OtherUserBubble = ({ text, time, otherUser, attachments }) => {
 
   let imgThumbs;
 
-  if(attachments !== null){
-    imgThumbs = attachments.map((image) => {
-      return <Box className={classes.imgThumb} key={image} component="img" src={image} />
-    })
-  } else {
-    attachments = [];
-  }
+    attachments?.map((image) => {
+        return <Box className={classes.imgThumb} key={image} component="img" src={image} />
+    });
 
   return (
     <Box className={classes.root}>

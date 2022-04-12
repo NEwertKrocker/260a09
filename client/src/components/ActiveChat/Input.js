@@ -87,7 +87,6 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       data.map((url) => {
         return imgURLs.push(url.data.url)
       })
-      return imgURLs
     })
     return imgAttachments
   }

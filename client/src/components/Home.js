@@ -50,7 +50,7 @@ const Home = ({ user, logout }) => {
     setConversations((prev) => prev.filter((convo) => convo.id));
   };
 
-  const saveMessage = async (body, imgBody) => {
+  const saveMessage = async (body) => {
     const { data } = await axios.post("/api/messages", body);
     return data;
   };

@@ -77,7 +77,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       imgBody.append("file", file);
       imgBody.append('upload_preset', "m7gjtifb");
 
-      imgData[i] = imgPost({
+      imgData.push(imgPost({
         method: 'post',
         url: "https://api.cloudinary.com/v1_1/dnxxjqz0o/image/upload",
         data: imgBody

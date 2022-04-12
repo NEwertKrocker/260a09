@@ -77,14 +77,14 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       imgBody.append("file", file);
       imgBody.append('upload_preset', "m7gjtifb");
 
-      imgData[i] = imgPost({
+      imgData.push(imgPost({
         method: 'post',
         url: "https://api.cloudinary.com/v1_1/dnxxjqz0o/image/upload",
         data: imgBody
       })
     }
     const imgAttachments = await Promise.all(imgData).then((data) => {
-      data.map((url) => {
+      data.forEach((url) => {
         return imgURLs.push(url.data.url)
       })
     })
